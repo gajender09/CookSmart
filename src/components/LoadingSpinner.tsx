@@ -1,5 +1,5 @@
 import React from 'react';
-import { Loader2, ChefHat } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 
 interface LoadingSpinnerProps {
   size?: 'sm' | 'md' | 'lg';
@@ -7,7 +7,7 @@ interface LoadingSpinnerProps {
 }
 
 /**
- * Modern loading spinner with cooking theme
+ * Reusable loading spinner component with optional message
  */
 export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ 
   size = 'md', 
@@ -21,12 +21,11 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
 
   return (
     <div className="flex flex-col items-center justify-center p-12 text-gray-500 dark:text-gray-400">
-      <div className="relative mb-4">
-        <ChefHat className="w-16 h-16 text-emerald-500 dark:text-emerald-400 animate-bounce" />
-        <Loader2 className="absolute -bottom-2 -right-2 w-6 h-6 animate-spin text-orange-500 dark:text-orange-400" />
-      </div>
+      <Loader2 
+        className={`${sizeClasses[size]} animate-spin text-orange-500 dark:text-orange-400`} 
+      />
       {message && (
-        <p className="text-lg font-medium text-center max-w-md">{message}</p>
+        <p className="mt-4 text-base font-medium">{message}</p>
       )}
     </div>
   );
