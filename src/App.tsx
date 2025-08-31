@@ -17,7 +17,7 @@ import { useShoppingList } from './hooks/useShoppingList';
 import { useCookingMode } from './hooks/useCookingMode';
 
 /**
- * Main FlavorCraft application component
+ * Main CookSmart application component
  */
 function App() {
   const { theme, toggleTheme, isDark } = useTheme();
@@ -120,25 +120,11 @@ function App() {
   }
 
   return (
-    <div className={`min-h-screen transition-colors duration-500 relative ${
+    <div className={`min-h-screen transition-colors duration-300 ${
       isDark 
         ? 'bg-gray-900' 
-        : 'bg-gradient-to-br from-orange-50 via-red-50 to-pink-50'
+        : 'bg-gradient-to-br from-emerald-50 via-green-50 to-blue-50'
     }`}>
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f97316' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }} />
-      </div>
-
-      {/* Glassy Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-orange-400/20 to-red-400/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute top-40 right-20 w-96 h-96 bg-gradient-to-br from-pink-400/20 to-red-400/20 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-gradient-to-br from-red-400/20 to-orange-400/20 rounded-full blur-3xl animate-pulse delay-2000" />
-      </div>
-
       {/* Header */}
       <Header
         isDark={isDark}
@@ -150,29 +136,22 @@ function App() {
       />
 
       {/* Main Content */}
-      <main className="relative z-10 py-16">
+      <main className="py-12">
         {/* Hero Section */}
-        <div className="max-w-7xl mx-auto px-4 mb-20">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md text-orange-600 dark:text-orange-400 rounded-full text-sm font-semibold mb-8 border border-white/20 dark:border-gray-700/50 shadow-lg">
+        <div className="max-w-7xl mx-auto px-4 mb-16">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full text-sm font-medium mb-8">
               <span>🍽️</span>
-              Your culinary adventure starts here
+              Your personal kitchen assistant
             </div>
             
-            <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight">
-              <span className="bg-gradient-to-r from-gray-900 via-orange-600 to-red-600 dark:from-gray-100 dark:via-orange-400 dark:to-red-400 bg-clip-text text-transparent">
-                What do you want
-              </span>
-              <br />
-              <span className="bg-gradient-to-r from-red-600 via-pink-600 to-orange-600 dark:from-red-400 dark:via-pink-400 dark:to-orange-400 bg-clip-text text-transparent">
-                to eat today?
-              </span>
+            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-gray-900 via-emerald-600 to-green-600 dark:from-gray-100 dark:via-emerald-400 dark:to-green-400 bg-clip-text text-transparent mb-8 leading-tight">
+              What do you want to eat today?
             </h1>
             
-            <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed font-medium">
-              Transform your ingredients into culinary masterpieces. 
-              <span className="text-orange-600 dark:text-orange-400 font-semibold">Discover, cook, and savor</span> amazing recipes 
-              tailored to what's in your kitchen right now.
+            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-4xl mx-auto leading-relaxed">
+              Tell us what ingredients you have, and we'll help you discover amazing recipes you can make right now. 
+              From quick weeknight dinners to weekend cooking adventures.
             </p>
           </div>
 
@@ -184,7 +163,7 @@ function App() {
         </div>
 
         {/* Category Filter */}
-        <div className="max-w-7xl mx-auto px-4 mb-16">
+        <div className="max-w-7xl mx-auto px-4 mb-12">
           <CategoryFilter
             categories={categories}
             selectedCategory={selectedCategory}
@@ -201,8 +180,8 @@ function App() {
             <LoadingSpinner 
               size="lg" 
               message={selectedCategory 
-                ? `Discovering amazing ${selectedCategory.toLowerCase()} recipes...`
-                : `Finding perfect recipes with "${lastSearchTerm}"...`
+                ? `Finding delicious ${selectedCategory.toLowerCase()} recipes...`
+                : `Searching for recipes with "${lastSearchTerm}"...`
               } 
             />
           )}
@@ -216,22 +195,15 @@ function App() {
           {!isLoading && !error && recipes.length > 0 && (
             <div>
               {/* Results Header */}
-              <div className="mb-16 text-center">
-                <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md rounded-full mb-6 border border-white/20 dark:border-gray-700/50 shadow-lg">
-                  <span className="text-2xl">🎉</span>
-                  <span className="text-orange-600 dark:text-orange-400 font-semibold">
-                    {recipes.length} delicious recipe{recipes.length !== 1 ? 's' : ''} found
-                  </span>
-                </div>
-                
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              <div className="mb-12 text-center">
+                <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
                   {selectedCategory 
-                    ? `Exquisite ${selectedCategory} Dishes` 
-                    : `Perfect matches for "${lastSearchTerm}"`
+                    ? `Delicious ${selectedCategory} Recipes` 
+                    : `Perfect recipes with "${lastSearchTerm}"`
                   }
                 </h2>
-                <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                  Each recipe is carefully selected to make the most of your ingredients
+                <p className="text-xl text-gray-600 dark:text-gray-400">
+                  We found {recipes.length} amazing recipe{recipes.length !== 1 ? 's' : ''} for you to try
                 </p>
               </div>
 

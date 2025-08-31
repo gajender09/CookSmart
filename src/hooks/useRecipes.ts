@@ -8,7 +8,7 @@ import {
 } from '../services/api';
 
 /**
- * Enhanced hook for managing recipe search with optimized API calls
+ * Custom hook for managing recipe search and data fetching
  */
 export const useRecipes = () => {
   const [recipes, setRecipes] = useState<RecipeCard[]>([]);
@@ -19,7 +19,7 @@ export const useRecipes = () => {
   const [error, setError] = useState<string | null>(null);
 
   /**
-   * Search for recipes by ingredient(s) with multi-ingredient support
+   * Search for recipes by ingredient(s)
    */
   const searchByIngredient = async (ingredients: string) => {
     if (!ingredients.trim()) return;
@@ -28,43 +28,11 @@ export const useRecipes = () => {
     setError(null);
     
     try {
-      // Split ingredients and search for each
-      const ingredientList = ingredients.split(',').map(i => i.trim()).filter(i => i);
-      const searchPromises = ingredientList.map(ingredient => 
-        searchRecipesByIngredient(ingredient)
-      );
+      const response = await searchRecipesByIngredient(ingredients);
+      setRecipes(response.meals || []);
       
-      const responses = await Promise.all(searchPromises);
-      
-      // Combine and deduplicate results
-      const allRecipes = new Map<string, RecipeCard>();
-      const recipeScores = new Map<string, number>();
-      
-      responses.forEach((response, index) => {
-        if (response.meals) {
-          response.meals.forEach(recipe => {
-            if (!allRecipes.has(recipe.idMeal)) {
-              allRecipes.set(recipe.idMeal, recipe);
-              recipeScores.set(recipe.idMeal, 1);
-            } else {
-              // Increase score for recipes that match multiple ingredients
-              recipeScores.set(recipe.idMeal, (recipeScores.get(recipe.idMeal) || 0) + 1);
-            }
-          });
-        }
-      });
-      
-      // Sort by score (recipes matching more ingredients first)
-      const sortedRecipes = Array.from(allRecipes.values()).sort((a, b) => {
-        const scoreA = recipeScores.get(a.idMeal) || 0;
-        const scoreB = recipeScores.get(b.idMeal) || 0;
-        return scoreB - scoreA;
-      });
-      
-      setRecipes(sortedRecipes);
-      
-      if (sortedRecipes.length === 0) {
-        setError('No recipes found for the given ingredient(s). Try popular ingredients like chicken, pasta, or tomato!');
+      if (!response.meals || response.meals.length === 0) {
+        setError('No recipes found for the given ingredient(s). Try a different ingredient!');
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An unexpected error occurred');
@@ -75,7 +43,7 @@ export const useRecipes = () => {
   };
 
   /**
-   * Search for recipes by category with caching
+   * Search for recipes by category
    */
   const searchByCategory = async (category: string) => {
     if (!category.trim()) return;
@@ -88,7 +56,7 @@ export const useRecipes = () => {
       setRecipes(response.meals || []);
       
       if (!response.meals || response.meals.length === 0) {
-        setError(`No recipes found in the ${category} category.`);
+        setError('No recipes found in this category.');
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An unexpected error occurred');
@@ -99,7 +67,7 @@ export const useRecipes = () => {
   };
 
   /**
-   * Fetch detailed recipe information with caching
+   * Fetch detailed recipe information
    */
   const fetchRecipeDetails = async (mealId: string) => {
     setIsLoadingDetails(true);
@@ -120,23 +88,17 @@ export const useRecipes = () => {
   };
 
   /**
-   * Load available categories with error handling
+   * Load available categories
    */
   const loadCategories = async () => {
     try {
       const response = await getCategories();
       
       if (response.meals) {
-        const categoryNames = response.meals.map(cat => cat.strCategory);
-        setCategories(categoryNames);
+        setCategories(response.meals.map(cat => cat.strCategory));
       }
     } catch (err) {
       console.error('Failed to load categories:', err);
-      // Set fallback categories if API fails
-      setCategories([
-        'Beef', 'Chicken', 'Dessert', 'Lamb', 'Miscellaneous', 
-        'Pasta', 'Pork', 'Seafood', 'Side', 'Starter', 'Vegan', 'Vegetarian'
-      ]);
     }
   };
 

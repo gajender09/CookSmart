@@ -1,5 +1,5 @@
 import React from 'react';
-import { Loader2, ChefHat, Sparkles } from 'lucide-react';
+import { Loader2, ChefHat } from 'lucide-react';
 
 interface LoadingSpinnerProps {
   size?: 'sm' | 'md' | 'lg';
@@ -7,31 +7,26 @@ interface LoadingSpinnerProps {
 }
 
 /**
- * Premium loading spinner with glassy design
+ * Modern loading spinner with cooking theme
  */
 export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ 
   size = 'md', 
-  message = 'Crafting culinary magic...' 
+  message = 'Cooking up something delicious...' 
 }) => {
+  const sizeClasses = {
+    sm: 'w-4 h-4',
+    md: 'w-8 h-8',
+    lg: 'w-12 h-12'
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center p-16 text-gray-600 dark:text-gray-400">
-      <div className="relative mb-8">
-        {/* Glowing background */}
-        <div className="absolute inset-0 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 rounded-full blur-2xl opacity-30 animate-pulse"></div>
-        
-        {/* Main spinner container */}
-        <div className="relative p-8 bg-white/60 dark:bg-gray-800/60 backdrop-blur-xl rounded-full shadow-2xl border border-white/20 dark:border-gray-700/50">
-          <ChefHat className="w-20 h-20 text-orange-600 dark:text-orange-400 animate-bounce" />
-          <Sparkles className="absolute -top-2 -right-2 w-8 h-8 text-yellow-400 animate-spin" />
-          <Loader2 className="absolute -bottom-3 -left-3 w-10 h-10 animate-spin text-red-500 dark:text-red-400" />
-        </div>
+    <div className="flex flex-col items-center justify-center p-12 text-gray-500 dark:text-gray-400">
+      <div className="relative mb-4">
+        <ChefHat className="w-16 h-16 text-emerald-500 dark:text-emerald-400 animate-bounce" />
+        <Loader2 className="absolute -bottom-2 -right-2 w-6 h-6 animate-spin text-orange-500 dark:text-orange-400" />
       </div>
-      
       {message && (
-        <div className="text-center">
-          <p className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-2">{message}</p>
-          <p className="text-gray-600 dark:text-gray-400">This won't take long...</p>
-        </div>
+        <p className="text-lg font-medium text-center max-w-md">{message}</p>
       )}
     </div>
   );

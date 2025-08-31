@@ -1,5 +1,5 @@
-import React from "react";
-import { Moon, Sun, Heart, ShoppingCart, ChefHat } from "lucide-react";
+import React from 'react';
+import { Moon, Sun, Heart, ShoppingCart, ChefHat } from 'lucide-react';
 
 interface HeaderProps {
   isDark: boolean;
@@ -13,13 +13,13 @@ interface HeaderProps {
 /**
  * Modern header with branding and navigation
  */
-export const Header: React.FC<HeaderProps> = ({
-  isDark,
-  onToggleTheme,
+export const Header: React.FC<HeaderProps> = ({ 
+  isDark, 
+  onToggleTheme, 
   favoritesCount,
   shoppingListCount,
   onShowFavorites,
-  onShowShoppingList,
+  onShowShoppingList
 }) => {
   return (
     <header className="sticky top-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 shadow-sm">
@@ -51,12 +51,10 @@ export const Header: React.FC<HeaderProps> = ({
               className="relative flex items-center space-x-2 px-3 py-2 rounded-lg bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 hover:bg-orange-100 dark:hover:bg-orange-900/30 transition-colors duration-200"
             >
               <ShoppingCart className="w-5 h-5" />
-              <span className="text-sm font-medium hidden sm:inline">
-                {shoppingListCount}
-              </span>
+              <span className="text-sm font-medium hidden sm:inline">{shoppingListCount}</span>
               {shoppingListCount > 0 && (
                 <div className="absolute -top-1 -right-1 w-5 h-5 bg-orange-500 text-white text-xs rounded-full flex items-center justify-center font-bold">
-                  {shoppingListCount > 99 ? "99+" : shoppingListCount}
+                  {shoppingListCount > 99 ? '99+' : shoppingListCount}
                 </div>
               )}
             </button>
@@ -67,12 +65,10 @@ export const Header: React.FC<HeaderProps> = ({
               className="relative flex items-center space-x-2 px-3 py-2 rounded-lg bg-pink-50 dark:bg-pink-900/20 text-pink-600 dark:text-pink-400 hover:bg-pink-100 dark:hover:bg-pink-900/30 transition-colors duration-200"
             >
               <Heart className="w-5 h-5" />
-              <span className="text-sm font-medium hidden sm:inline">
-                {favoritesCount}
-              </span>
+              <span className="text-sm font-medium hidden sm:inline">{favoritesCount}</span>
               {favoritesCount > 0 && (
                 <div className="absolute -top-1 -right-1 w-5 h-5 bg-pink-500 text-white text-xs rounded-full flex items-center justify-center font-bold">
-                  {favoritesCount > 99 ? "99+" : favoritesCount}
+                  {favoritesCount > 99 ? '99+' : favoritesCount}
                 </div>
               )}
             </button>
