@@ -10,7 +10,7 @@ interface RecipeGridProps {
 }
 
 /**
- * Responsive grid layout for recipe cards
+ * Responsive grid layout for displaying recipe cards
  */
 export const RecipeGrid: React.FC<RecipeGridProps> = ({ 
   recipes, 
@@ -23,8 +23,8 @@ export const RecipeGrid: React.FC<RecipeGridProps> = ({
   }
 
   return (
-    <div className="w-full">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+    <div className="w-full max-w-7xl mx-auto px-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {recipes.map((recipe) => (
           <RecipeCard
             key={recipe.idMeal}
@@ -36,11 +36,10 @@ export const RecipeGrid: React.FC<RecipeGridProps> = ({
         ))}
       </div>
       
-      <div className="text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 rounded-full text-sm font-medium">
-          <span>🍽️</span>
-          Found {recipes.length} delicious recipe{recipes.length !== 1 ? 's' : ''} for you
-        </div>
+      <div className="text-center mt-8">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
+          Found {recipes.length} delicious recipe{recipes.length !== 1 ? 's' : ''} 
+        </p>
       </div>
     </div>
   );

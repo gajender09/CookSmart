@@ -35,11 +35,6 @@ export const useFavorites = () => {
     }
   };
 
-  const clearFavorites = () => {
-    setFavorites([]);
-    localStorage.removeItem('recipe-favorites');
-  };
-
   const isFavorite = (recipeId: string): boolean => {
     return favorites.includes(recipeId);
   };
@@ -49,7 +44,6 @@ export const useFavorites = () => {
     addToFavorites,
     removeFromFavorites,
     toggleFavorite,
-    clearFavorites,
     isFavorite
   };
 };
