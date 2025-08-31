@@ -1,5 +1,5 @@
-import React from 'react';
-import { Moon, Sun, Heart, ShoppingCart, ChefHat, Sparkles } from 'lucide-react';
+import React from "react";
+import { Moon, Sun, Heart, ShoppingCart, ChefHat } from "lucide-react";
 
 interface HeaderProps {
   isDark: boolean;
@@ -11,51 +11,52 @@ interface HeaderProps {
 }
 
 /**
- * Premium header with glassy design and enhanced branding
+ * Modern header with branding and navigation
  */
-export const Header: React.FC<HeaderProps> = ({ 
-  isDark, 
-  onToggleTheme, 
+export const Header: React.FC<HeaderProps> = ({
+  isDark,
+  onToggleTheme,
   favoritesCount,
   shoppingListCount,
   onShowFavorites,
-  onShowShoppingList
+  onShowShoppingList,
 }) => {
   return (
-    <header className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border-b border-white/20 dark:border-gray-700/50 shadow-lg">
+    <header className="sticky top-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          {/* Enhanced Logo */}
-          <div className="flex items-center space-x-4">
-            <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-400 via-red-500 to-pink-500 rounded-2xl blur-lg opacity-75 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
-              <div className="relative w-14 h-14 bg-gradient-to-br from-orange-500 via-red-500 to-pink-600 rounded-2xl flex items-center justify-center shadow-2xl transform group-hover:scale-110 transition-all duration-300">
-                <ChefHat className="w-8 h-8 text-white" />
-                <Sparkles className="absolute -top-1 -right-1 w-4 h-4 text-yellow-300 animate-bounce" />
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <div className="flex items-center space-x-3">
+            <div className="relative">
+              <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl flex items-center justify-center shadow-lg transform rotate-3 hover:rotate-6 transition-transform duration-300">
+                <ChefHat className="w-6 h-6 text-white" />
               </div>
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-orange-400 rounded-full animate-pulse"></div>
             </div>
             <div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 dark:from-orange-400 dark:via-red-400 dark:to-pink-400 bg-clip-text text-transparent">
-                FlavorCraft
+              <h1 className="text-xl font-bold bg-gradient-to-r from-emerald-600 to-green-600 dark:from-emerald-400 dark:to-green-400 bg-clip-text text-transparent">
+                CookSmart
               </h1>
-              <p className="text-sm text-gray-500 dark:text-gray-400 -mt-1 font-medium">
-                Culinary inspiration awaits
+              <p className="text-xs text-gray-500 dark:text-gray-400 -mt-1">
+                Your kitchen companion
               </p>
             </div>
           </div>
 
           {/* Navigation Actions */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2">
             {/* Shopping List */}
             <button
               onClick={onShowShoppingList}
-              className="relative group flex items-center space-x-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 text-orange-600 dark:text-orange-400 hover:from-orange-100 hover:to-red-100 dark:hover:from-orange-900/30 dark:hover:to-red-900/30 transition-all duration-300 border border-orange-200/50 dark:border-orange-700/50 backdrop-blur-sm"
+              className="relative flex items-center space-x-2 px-3 py-2 rounded-lg bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 hover:bg-orange-100 dark:hover:bg-orange-900/30 transition-colors duration-200"
             >
-              <ShoppingCart className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
-              <span className="text-sm font-semibold hidden sm:inline">{shoppingListCount}</span>
+              <ShoppingCart className="w-5 h-5" />
+              <span className="text-sm font-medium hidden sm:inline">
+                {shoppingListCount}
+              </span>
               {shoppingListCount > 0 && (
-                <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs rounded-full flex items-center justify-center font-bold shadow-lg animate-pulse">
-                  {shoppingListCount > 99 ? '99+' : shoppingListCount}
+                <div className="absolute -top-1 -right-1 w-5 h-5 bg-orange-500 text-white text-xs rounded-full flex items-center justify-center font-bold">
+                  {shoppingListCount > 99 ? "99+" : shoppingListCount}
                 </div>
               )}
             </button>
@@ -63,13 +64,15 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Favorites */}
             <button
               onClick={onShowFavorites}
-              className="relative group flex items-center space-x-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-pink-50 to-red-50 dark:from-pink-900/20 dark:to-red-900/20 text-pink-600 dark:text-pink-400 hover:from-pink-100 hover:to-red-100 dark:hover:from-pink-900/30 dark:hover:to-red-900/30 transition-all duration-300 border border-pink-200/50 dark:border-pink-700/50 backdrop-blur-sm"
+              className="relative flex items-center space-x-2 px-3 py-2 rounded-lg bg-pink-50 dark:bg-pink-900/20 text-pink-600 dark:text-pink-400 hover:bg-pink-100 dark:hover:bg-pink-900/30 transition-colors duration-200"
             >
-              <Heart className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
-              <span className="text-sm font-semibold hidden sm:inline">{favoritesCount}</span>
+              <Heart className="w-5 h-5" />
+              <span className="text-sm font-medium hidden sm:inline">
+                {favoritesCount}
+              </span>
               {favoritesCount > 0 && (
-                <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-pink-500 to-red-500 text-white text-xs rounded-full flex items-center justify-center font-bold shadow-lg animate-pulse">
-                  {favoritesCount > 99 ? '99+' : favoritesCount}
+                <div className="absolute -top-1 -right-1 w-5 h-5 bg-pink-500 text-white text-xs rounded-full flex items-center justify-center font-bold">
+                  {favoritesCount > 99 ? "99+" : favoritesCount}
                 </div>
               )}
             </button>
@@ -77,7 +80,7 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Theme Toggle */}
             <button
               onClick={onToggleTheme}
-              className="p-3 rounded-xl bg-gray-100/80 dark:bg-gray-800/80 text-gray-600 dark:text-gray-300 hover:bg-gray-200/80 dark:hover:bg-gray-700/80 transition-all duration-300 hover:scale-110 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50"
+              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200 hover:scale-110"
               aria-label="Toggle theme"
             >
               {isDark ? (
