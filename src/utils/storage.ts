@@ -1,8 +1,11 @@
+import { ShoppingItem } from '../types/recipe';
+
 /**
  * Utility functions for localStorage operations
  */
 
 const FAVORITES_KEY = 'recipe-favorites';
+const SHOPPING_LIST_KEY = 'recipe-shopping-list';
 const THEME_KEY = 'recipe-theme';
 
 /**
@@ -30,28 +33,27 @@ export const saveFavorites = (favorites: string[]): void => {
 };
 
 /**
- * Add recipe to favorites
+ * Get shopping list from localStorage
  */
-export const addToFavorites = (recipeId: string): void => {
-  const currentFavorites = getFavorites();
-  if (!currentFavorites.includes(recipeId)) {
-    saveFavorites([...currentFavorites, recipeId]);
+export const getShoppingList = (): ShoppingItem[] => {
+  try {
+    const list = localStorage.getItem(SHOPPING_LIST_KEY);
+    return list ? JSON.parse(list) : [];
+  } catch (error) {
+    console.error('Error reading shopping list from localStorage:', error);
+    return [];
   }
 };
 
 /**
- * Remove recipe from favorites
+ * Save shopping list to localStorage
  */
-export const removeFromFavorites = (recipeId: string): void => {
-  const currentFavorites = getFavorites();
-  saveFavorites(currentFavorites.filter(id => id !== recipeId));
-};
-
-/**
- * Check if recipe is in favorites
- */
-export const isFavorite = (recipeId: string): boolean => {
-  return getFavorites().includes(recipeId);
+export const saveShoppingList = (list: ShoppingItem[]): void => {
+  try {
+    localStorage.setItem(SHOPPING_LIST_KEY, JSON.stringify(list));
+  } catch (error) {
+    console.error('Error saving shopping list to localStorage:', error);
+  }
 };
 
 /**

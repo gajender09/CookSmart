@@ -1,10 +1,5 @@
 import { useState, useEffect } from 'react';
-import { 
-  getFavorites, 
-  addToFavorites as addFavorite, 
-  removeFromFavorites as removeFavorite,
-  isFavorite as checkIsFavorite 
-} from '../utils/storage';
+import { getFavorites, saveFavorites } from '../utils/storage';
 
 /**
  * Custom hook for managing recipe favorites with localStorage persistence
@@ -14,21 +9,24 @@ export const useFavorites = () => {
 
   useEffect(() => {
     // Load favorites from localStorage on mount
-    setFavorites(getFavorites());
+    const savedFavorites = getFavorites();
+    setFavorites(savedFavorites);
   }, []);
 
   const addToFavorites = (recipeId: string) => {
-    addFavorite(recipeId);
-    setFavorites(getFavorites());
+    const newFavorites = [...favorites, recipeId];
+    setFavorites(newFavorites);
+    saveFavorites(newFavorites);
   };
 
   const removeFromFavorites = (recipeId: string) => {
-    removeFavorite(recipeId);
-    setFavorites(getFavorites());
+    const newFavorites = favorites.filter(id => id !== recipeId);
+    setFavorites(newFavorites);
+    saveFavorites(newFavorites);
   };
 
   const toggleFavorite = (recipeId: string) => {
-    if (checkIsFavorite(recipeId)) {
+    if (favorites.includes(recipeId)) {
       removeFromFavorites(recipeId);
     } else {
       addToFavorites(recipeId);
@@ -44,6 +42,7 @@ export const useFavorites = () => {
     addToFavorites,
     removeFromFavorites,
     toggleFavorite,
-    isFavorite
+    isFavorite,
+    favoritesCount: favorites.length
   };
 };

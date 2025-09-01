@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { RecipeCard, Recipe } from '../types/recipe';
+import { RecipeCard, Recipe, Category } from '../types/recipe';
 import { 
   searchRecipesByIngredient, 
   getRecipeDetails, 
@@ -7,20 +7,14 @@ import {
   searchRecipesByCategory 
 } from '../services/api';
 
-/**
- * Custom hook for managing recipe search and data fetching
- */
 export const useRecipes = () => {
   const [recipes, setRecipes] = useState<RecipeCard[]>([]);
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
-  const [categories, setCategories] = useState<string[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingDetails, setIsLoadingDetails] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  /**
-   * Search for recipes by ingredient(s)
-   */
   const searchByIngredient = async (ingredients: string) => {
     if (!ingredients.trim()) return;
 
@@ -42,9 +36,6 @@ export const useRecipes = () => {
     }
   };
 
-  /**
-   * Search for recipes by category
-   */
   const searchByCategory = async (category: string) => {
     if (!category.trim()) return;
 
@@ -66,9 +57,6 @@ export const useRecipes = () => {
     }
   };
 
-  /**
-   * Fetch detailed recipe information
-   */
   const fetchRecipeDetails = async (mealId: string) => {
     setIsLoadingDetails(true);
     
@@ -87,32 +75,48 @@ export const useRecipes = () => {
     }
   };
 
-  /**
-   * Load available categories
-   */
   const loadCategories = async () => {
     try {
       const response = await getCategories();
       
       if (response.meals) {
-        setCategories(response.meals.map(cat => cat.strCategory));
+        setCategories(response.meals);
+      } else {
+        // Fallback categories if API fails
+        setCategories([
+          { strCategory: 'Beef' },
+          { strCategory: 'Chicken' },
+          { strCategory: 'Dessert' },
+          { strCategory: 'Lamb' },
+          { strCategory: 'Miscellaneous' },
+          { strCategory: 'Pasta' },
+          { strCategory: 'Pork' },
+          { strCategory: 'Seafood' },
+          { strCategory: 'Side' },
+          { strCategory: 'Starter' },
+          { strCategory: 'Vegan' },
+          { strCategory: 'Vegetarian' }
+        ]);
       }
     } catch (err) {
       console.error('Failed to load categories:', err);
+      // Use fallback categories
+      setCategories([
+        { strCategory: 'Beef' },
+        { strCategory: 'Chicken' },
+        { strCategory: 'Dessert' },
+        { strCategory: 'Pasta' },
+        { strCategory: 'Seafood' },
+        { strCategory: 'Vegetarian' }
+      ]);
     }
   };
 
-  /**
-   * Clear current search results
-   */
   const clearResults = () => {
     setRecipes([]);
     setError(null);
   };
 
-  /**
-   * Close recipe details modal
-   */
   const closeRecipeDetails = () => {
     setSelectedRecipe(null);
   };

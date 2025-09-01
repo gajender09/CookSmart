@@ -60,6 +60,8 @@ export interface RecipeCard {
   idMeal: string;
   strMeal: string;
   strMealThumb: string;
+  strCategory?: string;
+  strArea?: string;
 }
 
 // API response structures
@@ -71,12 +73,33 @@ export interface RecipeDetailsResponse {
   meals: Recipe[] | null;
 }
 
+export interface Category {
+  strCategory: string;
+}
+
 export interface CategoryResponse {
-  meals: { strCategory: string }[] | null;
+  meals: Category[] | null;
 }
 
 // Processed ingredient data for recipe details
 export interface ProcessedIngredient {
   ingredient: string;
   measure: string;
+}
+
+// Shopping list item
+export interface ShoppingItem {
+  id: string;
+  ingredient: string;
+  measure: string;
+  completed: boolean;
+  recipeId: string;
+  recipeName: string;
+}
+
+// Cooking step for guided mode
+export interface CookingStep {
+  step: number;
+  instruction: string;
+  isCompleted: boolean;
 }
