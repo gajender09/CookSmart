@@ -1,5 +1,12 @@
-import React from 'react';
-import { Moon, Sun, Heart, ShoppingCart, ChefHat, Sparkles } from 'lucide-react';
+import React from "react";
+import {
+  Moon,
+  Sun,
+  Heart,
+  ShoppingCart,
+  ChefHat,
+  Sparkles,
+} from "lucide-react";
 
 interface HeaderProps {
   isDark: boolean;
@@ -10,13 +17,13 @@ interface HeaderProps {
   onShowShoppingList: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ 
-  isDark, 
-  onToggleTheme, 
-  favoritesCount, 
+export const Header: React.FC<HeaderProps> = ({
+  isDark,
+  onToggleTheme,
+  favoritesCount,
   shoppingListCount,
   onShowFavorites,
-  onShowShoppingList
+  onShowShoppingList,
 }) => {
   return (
     <header className="sticky top-0 z-50 bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl border-b border-white/20 dark:border-gray-700/50 shadow-lg">
@@ -31,13 +38,13 @@ export const Header: React.FC<HeaderProps> = ({
                 <Sparkles className="absolute -top-1 -right-1 w-4 h-4 text-yellow-300 animate-pulse" />
               </div>
             </div>
-            
+
             <div>
               <h1 className="text-3xl font-bold bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 bg-clip-text text-transparent">
-                TasteBud
+                CookSmart
               </h1>
               <p className="text-sm text-gray-500 dark:text-gray-400 -mt-1 font-medium">
-                Your culinary companion
+                Your kitchen companion
               </p>
             </div>
           </div>
@@ -62,7 +69,13 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={onShowFavorites}
               className="relative group p-3 rounded-xl bg-gradient-to-r from-pink-100 to-rose-100 dark:from-pink-900/30 dark:to-rose-900/30 hover:from-pink-200 hover:to-rose-200 dark:hover:from-pink-800/40 dark:hover:to-rose-800/40 transition-all duration-300 transform hover:scale-105"
             >
-              <Heart className={`w-6 h-6 ${favoritesCount > 0 ? 'text-red-500 fill-current' : 'text-pink-600 dark:text-pink-400'}`} />
+              <Heart
+                className={`w-6 h-6 ${
+                  favoritesCount > 0
+                    ? "text-red-500 fill-current"
+                    : "text-pink-600 dark:text-pink-400"
+                }`}
+              />
               {favoritesCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shadow-lg animate-pulse">
                   {favoritesCount}

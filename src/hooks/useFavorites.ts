@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { getFavorites, saveFavorites } from '../utils/storage';
+import { useState, useEffect } from "react";
+import { getFavorites, saveFavorites } from "../utils/storage";
 
 /**
  * Custom hook for managing recipe favorites with localStorage persistence
@@ -20,7 +20,7 @@ export const useFavorites = () => {
   };
 
   const removeFromFavorites = (recipeId: string) => {
-    const newFavorites = favorites.filter(id => id !== recipeId);
+    const newFavorites = favorites.filter((id) => id !== recipeId);
     setFavorites(newFavorites);
     saveFavorites(newFavorites);
   };
@@ -43,6 +43,6 @@ export const useFavorites = () => {
     removeFromFavorites,
     toggleFavorite,
     isFavorite,
-    favoritesCount: favorites.length
+    favoritesCount: favorites.length,
   };
 };

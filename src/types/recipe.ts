@@ -60,8 +60,6 @@ export interface RecipeCard {
   idMeal: string;
   strMeal: string;
   strMealThumb: string;
-  strCategory?: string;
-  strArea?: string;
 }
 
 // API response structures
@@ -92,7 +90,7 @@ export interface ShoppingItem {
   id: string;
   ingredient: string;
   measure: string;
-  completed: boolean;
+  checked: boolean;
   recipeId: string;
   recipeName: string;
 }
