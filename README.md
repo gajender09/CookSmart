@@ -1,5 +1,7 @@
 # 🍽️ CookSmart - Your Kitchen Companion
 
+## Student ID - Naukri0925
+
 ## Overview
 
 CookSmart is a user-friendly web app for busy professionals like Taylor, simplifying recipe discovery and cooking based on ingredients, time, or mood. Powered by TheMealDB API, it offers search, favorites, shopping list, and guided cooking features.
@@ -7,7 +9,7 @@ CookSmart is a user-friendly web app for busy professionals like Taylor, simplif
 ## Links
 
 - 🌐 **Live Demo**: [CookSmart](https://cook-smart-two.vercel.app/) 
-- 📹 **Walkthrough**: [YouTube Video](https://www.youtube.com/watch?v=placeholder) 
+- 📹 **Walkthrough**: [YouTube Video](https://youtu.be/j3ZS1D1oJoA) 
 - 💻 **Code**: [CodeSandbox](https://codesandbox.io/p/github/gajender09/CookSmart/main)
 
 ## Tech Stack
