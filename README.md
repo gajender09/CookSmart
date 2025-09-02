@@ -8,9 +8,9 @@ CookSmart is a user-friendly web app for busy professionals like Taylor, simplif
 
 ## Links
 
-- 🌐 **Live Demo**: [CookSmart](https://cook-smart-two.vercel.app/) 
-- 📹 **Walkthrough**: [YouTube Video](https://youtu.be/j3ZS1D1oJoA) 
-- 💻 **Code**: [CodeSandbox](https://codesandbox.io/p/github/gajender09/CookSmart/main)
+- 🌐 **Live Demo**: <a href="https://cook-smart-two.vercel.app/" target="_blank">CookSmart</a>
+- 📹 **Walkthrough**: <a href="https://youtu.be/j3ZS1D1oJoA" target="_blank">YouTube Video</a>
+- 💻 **Code**: <a href="https://codesandbox.io/p/github/gajender09/CookSmart/main" target="_blank">CodeSandbox</a>
 
 ## Tech Stack
 
